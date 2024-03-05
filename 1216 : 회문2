@@ -1,0 +1,59 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        char[][] puzzle = new char[100][100]; // 문자열들을 받아서 넣을 8*8 배열
+
+        int count = 0; // 회문이 나올때 카운트할 변수
+        boolean flag = false; // 회문인지 아닌지 확인할 플래그
+
+        for(int TC=1;TC<=10;TC++){
+            count = 0;
+            // 찾을 회문 길이 입력받기
+            int N = Integer.parseInt(br.readLine());
+            //입력받기
+            for(int i=0;i<100;i++){
+                String str = br.readLine();
+                for(int j=0;j<100;j++){
+                    puzzle[i][j] = str.charAt(j);
+                }
+            }
+            // 가로 확인하기
+            for(int len=1;len<=100;len++){
+                for(int i=0;i<100;i++){
+                    for(int j=0; j<100-len+1;j++){
+                        flag = true;
+                        for(int k=0;k<len/2;k++){
+                            if(puzzle[i][j+k]!=puzzle[i][j-k+len-1]){
+                                flag = false;
+                            }
+                        }
+                        if(flag){
+                            count = Math.max(count, len);
+                        }
+                    }
+                }
+            }
+            // 세로 확인하기
+            for(int len=1;len<=100;len++){
+                for(int i=0;i<100-len+1;i++){
+                    for(int j=0; j<100;j++){
+                        flag = true;
+                        for(int k=0;k<len/2;k++){
+                            if(puzzle[i+k][j]!=puzzle[i-k+len-1][j]){
+                                flag = false;
+                            }
+                        }
+                        if(flag){
+                            count = Math.max(count, len);
+                        }
+                    }
+                }
+            }
+            System.out.printf("#%d %d\n", TC, count);
+        }  
+    }
+}
