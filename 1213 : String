@@ -1,0 +1,25 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for(int i=0;i<10;i++){
+            int TC = Integer.parseInt(br.readLine());
+            String str = br.readLine(); // 찾아야할 단어
+            String arr = br.readLine(); // 단어가 포함되어있는 글
+            int count = 0; // 단어가 일치하는 횟수
+
+            Matcher matcher = Pattern.compile(str).matcher(arr);
+
+            while(matcher.find()){
+                count++;
+            }
+            
+            System.out.printf("#%d %d\n", TC, count);
+        }
+    }
+}
