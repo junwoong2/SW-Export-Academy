@@ -1,0 +1,27 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for(int i=1;i<=10;i++){
+            int TC = Integer.parseInt(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int number = Integer.parseInt(st.nextToken());
+            int pow = Integer.parseInt(st.nextToken());
+            int result = pow(number, pow);
+
+            System.out.printf("#%d %d\n", TC, result);
+        }
+    }
+
+    public static int pow(int number, int pow){
+        if(pow==0){
+            return 1;
+        }
+
+        return number*pow(number, pow-1);
+    }
+}
