@@ -1,0 +1,51 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class App {
+    static int size[][] ;
+    static int result;
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for(int tc=1;tc<=10;tc++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int t = Integer.parseInt(st.nextToken());
+            int n = Integer.parseInt(st.nextToken());
+
+            result = 0;
+            size = new int[2][100];
+
+            st = new StringTokenizer(br.readLine());
+            for(int i=0;i<n;i++){
+                int index = Integer.parseInt(st.nextToken());
+                int value = Integer.parseInt(st.nextToken());
+
+                if(size[0][index]!= 0){
+                    size[1][index] = value;
+                }
+                else{
+                    size[0][index] = value;
+                }
+            }
+            solve(size[0][1]);
+            solve(size[0][1]);
+            
+            System.out.println("#"+t+""+result);
+        }
+        br.close();
+    }
+    public static void solve(int index){
+        if(index == 0){
+            return;
+        }
+
+        if(index == 99){
+            result = 1;
+            return;
+        }
+
+        solve(size[0][index]);
+        solve(size[0][index]);
+    }
+}
